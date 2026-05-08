@@ -32,7 +32,7 @@ useEffect(() => {
           />
 
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            Explore Raspberry Pi Circuits
+            Explore Lab Circuits
             <span className="block text-brand-gradient">
               in Interactive 3D
             </span>
