@@ -39,7 +39,7 @@ export default function About() {
 
           {/* Developer Card */}
           <div className="rounded-2xl p-6 bg-slate-900/60 border border-slate-800 backdrop-blur-md">
-            <h2 className="text-xl font-semibold">Kushagra Srivatsava</h2>
+            <h2 className="text-xl font-semibold">Kushagra Srivastava</h2>
             <p className="text-sm text-blue-400 mt-1">Backend / Content</p>
             <p className="text-slate-400 text-sm mt-4">
               Managed circuit data, quiz content, and experiment structure
