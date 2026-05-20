@@ -3,19 +3,17 @@ import { circuits } from "../data/circuits";
 
 export default function CircuitsList() {
   return (
-<section className="text-white py-24">      <div className="max-w-5xl mx-auto px-6">
+    <section className="text-white py-24">
+      <div className="max-w-5xl mx-auto px-6">
         
-        <h1 className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold mb-8">
           Lab <span className="text-brand-gradient">Experiments</span>
         </h1>
 
-
-
-        <br></br>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {circuits.map((circuit, idx) => (
             <Link
-            key={circuit.id}
+            key={circuit.slug}
             to={`/circuit/${circuit.slug}`}
             className="
               reveal
