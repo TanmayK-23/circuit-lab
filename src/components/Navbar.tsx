@@ -13,12 +13,7 @@ export default function Navbar() {
   };
 
   const goCircuits = () => {
-    navigate("/");
-    setTimeout(() => {
-      document
-        .getElementById("circuits")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    navigate("/", { state: { scrollToCircuits: true } });
   };
 
   return (
