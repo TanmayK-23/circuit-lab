@@ -6,8 +6,12 @@ import "./index.css";
 
 import "@google/model-viewer";
 
+let observer: IntersectionObserver | null = null;
+
 export const observeReveal = () => {
-  const observer = new IntersectionObserver(
+  if (observer) observer.disconnect();
+
+  observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -22,7 +26,7 @@ export const observeReveal = () => {
     }
   );
 
-  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  document.querySelectorAll(".reveal").forEach((el) => observer!.observe(el));
 };
 
 const root = ReactDOM.createRoot(
@@ -36,8 +40,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-// run reveal AFTER DOM is painted
-requestAnimationFrame(() => {
-  observeReveal();
-});
