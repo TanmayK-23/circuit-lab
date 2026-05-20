@@ -11,7 +11,6 @@ export type QuizQuestion = {
 };
 
 export type Circuit = {
-  id: string;          // same as slug
   name: string;
   category: string;
   slug: string;
@@ -27,7 +26,6 @@ export type Circuit = {
 
 export const circuits: Circuit[] = [
   {
-    id: "ohms-law",
     name: "Ohm’s Law – Single Resistor Circuit",
     category: "Basic Electronics",
     slug: "ohms-law",
@@ -62,7 +60,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "voltage-divider",
     name: "Voltage Divider Circuit",
     category: "Analog Electronics",
     slug: "voltage-divider",
@@ -81,7 +78,7 @@ export const circuits: Circuit[] = [
       "Place two resistors (R1 - 25E to 25G and R2 - 30E to 30G) in series on the breadboard.",
       "Connect the positive terminal of the DC power supply to the free end of R1 (25E).",
       "Connect the free end (30G) of R2 to the negative terminal to battery.",
-      "Take the output voltage from the junction between R1 and R2 (30E and 30G).",
+      "Take the output voltage from the junction between R1 and R2 (30E).",
       "Connect the voltmeter positive probe to the junction of R1 and R2 (30E).",
       "Connect the voltmeter negative probe to ground (30G) and measure the output voltage."
     ],
@@ -100,7 +97,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "led-current-limiting",
     name: "LED with Current-Limiting Resistor",
     category: "Basic Electronics",
     slug: "led-current-limiting",
@@ -137,7 +133,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "series-resistors",
     name: "Series Resistors – Equivalent Resistance",
     category: "Analog Electronics",
     slug: "series-resistors",
@@ -173,7 +168,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "parallel-resistors",
     name: "Parallel Resistors – Current Division",
     category: "Analog Electronics",
     slug: "parallel-resistors",
@@ -209,7 +203,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "rc-circuit",
     name: "RC Circuit – Charging and Discharging",
     category: "Analog Electronics",
     slug: "rc-circuit",
@@ -246,7 +239,6 @@ export const circuits: Circuit[] = [
   },
 
   {
-    id: "transistor-switching",
     name: "Transistor Switching – Logic Level Demonstration",
     category: "Semiconductor Devices",
     slug: "transistor-switching",
@@ -257,8 +249,8 @@ export const circuits: Circuit[] = [
     components: [
       { name: "Breadboard", type: "hardware", quantity: 1 },
       { name: "NPN Transistor", type: "active", quantity: 1 },
-      { name: "LED", type: "active", quantity: 1 },
-      { name: "Resistor", type: "passive", quantity: 2 },
+      { name: "LED (acts as resistor)", type: "active", quantity: 1 },
+      { name: "Resistor", type: "passive", quantity: 1 },
       { name: "DC Power Supply", type: "source", quantity: 1 },
       { name: "Jumper Wires", type: "wire", quantity: 5 },
     ],
@@ -285,7 +277,6 @@ export const circuits: Circuit[] = [
     ]
   },
   {
-    id: "traffic-light-esp8266",
     name: "Traffic Light Control using ESP8266",
     category: "Embedded Systems",
     slug: "traffic-light-esp8266",
