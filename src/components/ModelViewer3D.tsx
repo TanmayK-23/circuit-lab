@@ -5,6 +5,7 @@ type Hotspot = {
   id: string;
   position: string; // "x y z"
   label: string;
+  normal?: string; // "x y z"
 };
 
 type ModelViewer3DProps = {
@@ -83,7 +84,7 @@ const ModelViewer3D: React.FC<ModelViewer3DProps> = ({ src, alt, hotspots = [] }
             key={hotspot.id}
             slot={`hotspot-${hotspot.id}`}
             data-position={hotspot.position}
-            data-normal="0m 1m 0m"
+            data-normal={hotspot.normal || "0m 1m 0m"}
             onClick={(e) => {
               e.stopPropagation();
               setActiveHotspot(
@@ -97,9 +98,9 @@ const ModelViewer3D: React.FC<ModelViewer3DProps> = ({ src, alt, hotspots = [] }
               <div
                 className="absolute left-1/2 top-[-0.75rem]
                            -translate-x-1/2 -translate-y-full
-                           whitespace-nowrap
+                           w-max max-w-[200px] text-wrap text-center
                            bg-slate-900 text-white text-xs
-                           px-2 py-1 rounded-md border border-slate-700
+                           px-2 py-1.5 rounded-md border border-slate-700
                            pointer-events-auto"
               >
                 {hotspot.label}
