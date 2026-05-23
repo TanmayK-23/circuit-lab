@@ -66,7 +66,7 @@ export default function CircuitDetail() {
 
   if (!circuit) {
     return (
-      <section className="text-white py-16">
+      <section className="text-white pt-28 pb-16">
         <div className="max-w-3xl mx-auto px-6">
           <h1 className="text-3xl font-bold mb-4">Circuit not found</h1>
           <p className="text-slate-400 mb-6">
@@ -85,7 +85,7 @@ export default function CircuitDetail() {
   }
 
   return (
-    <section className="text-white py-12 animate-fadeIn">
+    <section className="text-white pt-28 pb-12 animate-fadeIn">
       <div className="max-w-5xl mx-auto px-6 space-y-10">
         {/* Header */}
         <header className="space-y-4 pb-6">

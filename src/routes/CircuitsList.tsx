@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { circuits } from "../data/circuits";
+import { observeReveal } from "../main";
 
 export default function CircuitsList() {
+  useEffect(() => {
+    // Small delay to ensure DOM is painted before observing
+    const timer = setTimeout(() => {
+      observeReveal();
+    }, 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <section className="text-white py-24">
+    <section className="text-white pt-28 pb-24">
       <div className="max-w-5xl mx-auto px-6">
         
         <h1 className="text-3xl font-bold mb-8">
