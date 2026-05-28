@@ -1,16 +1,16 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import FadingVideo from "../components/FadingVideo";
 import CinematicNavbar from "../components/CinematicNavbar";
 import BlurText from "../components/BlurText";
 
 export default function About() {
-  const itemVariant = {
+  const itemVariant: Variants = {
     hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
     visible: (customDelay: number) => ({
       filter: "blur(0px)",
       opacity: 1,
       y: 0,
-      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" },
+      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" as const },
     }),
   };
 

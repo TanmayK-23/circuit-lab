@@ -1,77 +1,127 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { motion, type Variants } from "framer-motion";
 import { circuits } from "../data/circuits";
-import { observeReveal } from "../main";
+import FadingVideo from "../components/FadingVideo";
+import CinematicNavbar from "../components/CinematicNavbar";
+import BlurText from "../components/BlurText";
 
 export default function CircuitsList() {
-  useEffect(() => {
-    // Small delay to ensure DOM is painted before observing
-    const timer = setTimeout(() => {
-      observeReveal();
-    }, 50);
-    return () => clearTimeout(timer);
-  }, []);
+  const itemVariant: Variants = {
+    hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
+    visible: (customDelay: number) => ({
+      filter: "blur(0px)",
+      opacity: 1,
+      y: 0,
+      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" as const },
+    }),
+  };
 
   return (
-    <section className="text-white pt-28 pb-24">
-      <div className="max-w-5xl mx-auto px-6">
-        
-        <h1 className="text-3xl font-bold mb-8">
-          Lab <span className="text-brand-gradient">Experiments</span>
-        </h1>
+    <div className="w-full bg-black min-h-screen font-body text-white selection:bg-white/20">
+      <CinematicNavbar />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {circuits.map((circuit, idx) => (
-            <Link
-            key={circuit.slug}
-            to={`/circuit/${circuit.slug}`}
-            className="
-              reveal
-              bg-slate-900/60 backdrop-blur-lg
-              border border-slate-800/70
-              rounded-2xl overflow-hidden
-              transition-all duration-300
-              hover:-translate-y-2
-             hover:border-amber-400/80
-              hover:shadow-xl hover:shadow-amber-400/20
-              group
-            "
-            style={{ transitionDelay: `${idx * 80}ms` }}
-          >
-              <div className="h-40 bg-slate-950/80 flex items-center justify-center">
-                <img
-                  src={circuit.thumbnail}
-                  alt={circuit.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              <div className="p-4">
-                <h2 className="text-lg font-semibold mb-2 tracking-tight">{circuit.name}</h2>
-                <span
-                  className="
-                    inline-block mb-3
-                    text-xs font-medium
-                    px-3 py-1 rounded-full
-                    text-white
-                    bg-gradient-to-r from-blue-500/60 to-purple-500/60
-                    backdrop-blur-sm
-                    shadow-sm shadow-blue-500/10
-                  "
-                >
-                  {circuit.category}
-                </span>
-                <p className="text-slate-400 text-sm line-clamp-2">
-                  {circuit.description}
-                </p>
-                <p className="mt-3 text-sm text-blue-400 opacity-0 group-hover:opacity-100 transition">
-                  View in interactive 3D →
-                </p>
-              </div>
-            </Link>
-          ))}
+      {/* =========================================
+          SECTION 1: HERO
+          ========================================= */}
+      <section className="relative w-full h-screen flex flex-col overflow-hidden bg-black">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <FadingVideo
+            src="/videos/home2.mp4"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </div>
-      </div>
-    </section>
+
+        {/* Content */}
+        <div className="relative z-10 px-6 md:px-16 lg:px-20 flex flex-col items-center justify-center h-full">
+          <div className="flex flex-col items-center text-center">
+            <motion.div
+              custom={0.2}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariant}
+              className="text-sm font-body text-white/80 mb-6 uppercase tracking-wider"
+            >
+              // Catalogue
+            </motion.div>
+            
+            <BlurText 
+              text="Lab Experiments" 
+              className="font-heading italic text-white text-6xl md:text-7xl lg:text-[7rem] leading-[0.9] tracking-[-3px]"
+            />
+          </div>
+          
+          <motion.div
+            custom={1.0}
+            initial="hidden"
+            animate="visible"
+            variants={itemVariant}
+            className="absolute bottom-12 flex flex-col items-center gap-2 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <span className="text-xs font-body tracking-widest uppercase">Scroll</span>
+            <svg className="w-5 h-5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14" />
+              <path d="M19 12l-7 7-7-7" />
+            </svg>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* =========================================
+          SECTION 2: GRID
+          ========================================= */}
+      <section className="relative w-full min-h-screen bg-black">
+        {/* Content */}
+        <div className="relative z-10 px-6 md:px-16 lg:px-20 pt-24 pb-24 flex flex-col min-h-screen">
+          <motion.div 
+            custom={0.2}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={itemVariant}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto"
+          >
+            {circuits.map((circuit) => (
+              <Link
+                key={circuit.slug}
+                to={`/circuit/${circuit.slug}`}
+                className="liquid-glass rounded-[1.25rem] p-6 flex flex-col group hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="h-48 w-full rounded-xl overflow-hidden liquid-glass mb-6">
+                  <img
+                    src={circuit.thumbnail}
+                    alt={circuit.name}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
+                  />
+                </div>
+                
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h2 className="font-heading italic text-white text-3xl tracking-[-1px] leading-none mb-3">
+                      {circuit.name}
+                    </h2>
+                    <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap inline-block mb-4">
+                      {circuit.category}
+                    </span>
+                    <p className="text-sm text-white/80 font-body font-light leading-snug line-clamp-2">
+                      {circuit.description}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-6 flex items-center justify-between text-sm text-white/90 font-medium group-hover:text-white transition-colors">
+                    View in 3D
+                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const location = useLocation();
-  const isCinematic = location.pathname === "/" || location.pathname === "/about";
+  const isCinematic = location.pathname === "/" || location.pathname === "/about" || location.pathname === "/experiments";
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden bg-black">

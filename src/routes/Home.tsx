@@ -1,19 +1,17 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import FadingVideo from "../components/FadingVideo";
 import CinematicNavbar from "../components/CinematicNavbar";
 import BlurText from "../components/BlurText";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();
-
-  const itemVariant = {
+  const itemVariant: Variants = {
     hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
     visible: (customDelay: number) => ({
       filter: "blur(0px)",
       opacity: 1,
       y: 0,
-      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" },
+      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" as const },
     }),
   };
 
@@ -37,16 +35,7 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center pt-24 px-4">
           
-          <motion.div
-            custom={0.4}
-            initial="hidden"
-            animate="visible"
-            variants={itemVariant}
-            className="liquid-glass rounded-full flex items-center p-1 pr-4 gap-3 mb-8 cursor-default pointer-events-auto"
-          >
-            <span className="bg-white text-black px-3 py-1 rounded-full text-xs font-semibold">Live</span>
-            <span className="text-sm text-white/90 font-medium">Interactive WebXR Platform Arrives 2026</span>
-          </motion.div>
+
 
           <BlurText 
             text="Explore Circuits Across the Digital Universe" 
@@ -81,9 +70,10 @@ export default function Home() {
               onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
               className="text-sm font-medium text-white/90 hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
             >
-              Watch Demo
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <polygon points="6 4 20 12 6 20 6 4" />
+              Know More
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14" />
+                <path d="m19 12-7 7-7-7" />
               </svg>
             </button>
           </motion.div>
@@ -120,7 +110,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Partners */}
         <motion.div
           custom={1.4}
           initial="hidden"
@@ -130,9 +119,6 @@ export default function Home() {
         >
           <div className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium text-white/90">
             Developed for E-Yantra IoT & Embedded Systems Lab
-          </div>
-          <div className="flex items-center justify-center flex-wrap gap-8 md:gap-16 font-heading italic text-white/90 text-2xl md:text-3xl tracking-tight opacity-80">
-            <span>Tanmay</span>
           </div>
         </motion.div>
       </section>
