@@ -7,10 +7,14 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const location = useLocation();
-  const isCinematic = location.pathname === "/" || location.pathname === "/about" || location.pathname === "/experiments";
+  const isCinematic = 
+    location.pathname === "/" || 
+    location.pathname === "/about" || 
+    location.pathname === "/experiments" ||
+    location.pathname.startsWith("/circuit/");
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden bg-black">
+    <div className="min-h-screen text-white relative overflow-clip bg-black">
       {!isCinematic && (
         <>
           {/* Upper canvas glow */}
