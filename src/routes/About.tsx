@@ -42,7 +42,7 @@ export default function About() {
             </motion.div>
             
             <BlurText 
-              text="About the Developers" 
+              text="About the Developer" 
               className="font-heading italic text-white text-5xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]"
             />
 
@@ -64,38 +64,16 @@ export default function About() {
             initial="hidden"
             animate="visible"
             variants={itemVariant}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-auto max-w-6xl mx-auto w-full"
+            className="mt-auto max-w-3xl mx-auto w-full"
           >
-            {/* Developer Card 1 */}
-            <div className="liquid-glass rounded-[1.25rem] p-6 min-h-[280px] flex flex-col justify-between hover:bg-white/[0.03] transition-colors">
+            {/* Sole Developer Card */}
+            <div className="liquid-glass rounded-[1.25rem] p-8 md:p-12 min-h-[300px] flex flex-col justify-center items-center text-center transition-colors">
               <div>
-                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none mb-2">Tanmay Kumar</h3>
-                <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap inline-block">3D & AR Integration</span>
+                <h3 className="font-heading italic text-white text-4xl md:text-6xl tracking-[-2px] leading-none mb-4">Tanmay Kumar</h3>
+                <span className="liquid-glass rounded-full px-4 py-1.5 text-xs text-white/90 font-body inline-block tracking-widest uppercase mb-2">Lead Engineer & Designer</span>
               </div>
-              <p className="mt-6 text-sm text-white/80 font-body font-light leading-snug">
-                Responsible for 3D model integration, AR visualization, and interactive component hotspots with cutting-edge UI/UX design.
-              </p>
-            </div>
-
-            {/* Developer Card 2 */}
-            <div className="liquid-glass rounded-[1.25rem] p-6 min-h-[280px] flex flex-col justify-between hover:bg-white/[0.03] transition-colors">
-              <div>
-                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none mb-2">Anshul Pagar</h3>
-                <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap inline-block">ArUco Visualisation</span>
-              </div>
-              <p className="mt-6 text-sm text-white/80 font-body font-light leading-snug">
-                Implemented ArUco marker detection to track physical markers and accurately place virtual objects in the real world, enabling reliable marker-based AR interactions in the lab.
-              </p>
-            </div>
-
-            {/* Developer Card 3 */}
-            <div className="liquid-glass rounded-[1.25rem] p-6 min-h-[280px] flex flex-col justify-between hover:bg-white/[0.03] transition-colors">
-              <div>
-                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none mb-2">Kushagra Srivastava</h3>
-                <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap inline-block">Backend / Content</span>
-              </div>
-              <p className="mt-6 text-sm text-white/80 font-body font-light leading-snug">
-                Managed circuit data, quiz content, and experiment structure to ensure accurate, robust learning outcomes for all students.
+              <p className="mt-6 text-sm md:text-base text-white/80 font-body font-light leading-relaxed max-w-2xl">
+                The application is built on a modern stack featuring <strong className="text-white font-medium">React</strong> and <strong className="text-white font-medium">Vite</strong> for lightning-fast performance, heavily customized <strong className="text-white font-medium">Tailwind CSS</strong> to power the proprietary cinematic "liquid-glass" design system, <strong className="text-white font-medium">Framer Motion</strong> for fluid scroll animations, <strong className="text-white font-medium">HLS.js</strong> for native adaptive background video streaming, and <strong className="text-white font-medium">Model-Viewer</strong> for immersive 3D and Augmented Reality integration.
               </p>
             </div>
           </motion.div>
