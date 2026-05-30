@@ -28,6 +28,7 @@ export default function CircuitsList() {
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <FadingVideo
             src="/videos/home2.mp4"
+            poster="/images/circuits/experiments.png"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
@@ -72,6 +73,19 @@ export default function CircuitsList() {
           SECTION 2: GRID
           ========================================= */}
       <section className="relative w-full min-h-screen bg-black">
+        {/* Background Video for Grid - Sticky to maintain aspect ratio during scroll */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="sticky top-0 w-full h-screen">
+            <FadingVideo
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260411_104032_69319010-2458-492b-b04d-b40a5dfa4482.mp4"
+              poster="/images/circuits/circuit_list.png"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Very light overlay just for contrast, no haze */}
+            <div className="absolute inset-0 bg-black/10"></div>
+          </div>
+        </div>
+
         {/* Content */}
         <div className="relative z-10 px-6 md:px-16 lg:px-20 pt-24 pb-24 flex flex-col min-h-screen">
           <motion.div 
@@ -86,14 +100,15 @@ export default function CircuitsList() {
               <Link
                 key={circuit.slug}
                 to={`/circuit/${circuit.slug}`}
-                className="liquid-glass rounded-[1.25rem] p-6 flex flex-col group hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-1"
+                className="liquid-glass-dark rounded-2xl p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1"
               >
-                <div className="h-48 w-full rounded-xl overflow-hidden liquid-glass mb-6">
+                <div className="h-48 w-full rounded-xl overflow-hidden mb-6 relative">
                   <img
                     src={circuit.thumbnail}
                     alt={circuit.name}
                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none"></div>
                 </div>
                 
                 <div className="flex-1 flex flex-col justify-between">
