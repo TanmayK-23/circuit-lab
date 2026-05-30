@@ -4,17 +4,19 @@ An interactive web-based Augmented Reality (AR) platform designed for visualizin
 
 ## Features
 
+- **Cinematic Liquid-Glass UI:** A premium, immersive user interface powered by custom Tailwind CSS frosting, fluid scroll animations via Framer Motion, and native adaptive background video streaming (HLS).
 - **Interactive 3D Circuit Models:** View precise 3D recreations of breadboard layouts and hardware modules.
-- **Augmented Reality Integration:** Seamlessly place circuits into the real-world environment using ArUco marker tracking and WebXR.
+- **Augmented Reality Integration:** Seamlessly place circuits into the real-world environment using WebXR and Model-Viewer.
 - **Interactive Component Hotspots:** Click on individual components within the 3D viewer to see their roles, wiring, and technical details.
 - **Experiment Breakdowns:** Access wiring steps, component lists, safety notes, logic snippets, and quizzes for each circuit.
-- **Responsive & Modern UI:** A fully responsive web interface featuring a sleek, dark-themed design built with Tailwind CSS.
 
 ## Tech Stack
 
 - **Framework:** React + TypeScript
 - **Build Tool:** Vite
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS (Custom Liquid-Glass Design System)
+- **Animations:** Framer Motion
+- **Video Streaming:** HLS.js
 - **3D / AR Rendering:** Google's `<model-viewer>` component
 - **Routing:** React Router DOM
 
@@ -83,10 +85,9 @@ To add a new experiment to the lab platform:
    ]
    ```
 
-## Development Team
+## Developer
 
-This project is developed to enhance the learning experience in the Spatial Computing Lab. 
+This project was developed to enhance the learning experience in the Spatial Computing Lab. 
 
-- **Tanmay Kumar** - 3D & AR Integration, UI/UX Design
-- **Anshul Pagar** - ArUco Marker Visualization and Tracking
-- **Kushagra Srivastava** - Backend, Content, and Experiment Structuring
+- **Tanmay Kumar** - Lead Engineer & Designer
+  - *Solely designed and engineered the entire platform.*
