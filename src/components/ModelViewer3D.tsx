@@ -45,18 +45,17 @@ const ModelViewer3D: React.FC<ModelViewer3DProps> = ({ src, alt, hotspots = [] }
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden ${
-        isFullscreen ? "bg-black" : "rounded-xl border border-slate-800"
+      className={`relative w-full h-full overflow-hidden ${
+        isFullscreen ? "bg-black" : ""
       }`}
     >
       {/* Fullscreen button */}
       <button
         onClick={toggleFullscreen}
         className="absolute top-3 right-3 z-20
-                   bg-slate-900/80 backdrop-blur
-                   text-white text-xs px-3 py-1.5
-                   rounded-md border border-slate-700
-                   hover:bg-slate-800 transition"
+                   liquid-glass-strong
+                   text-white text-xs px-4 py-2
+                   rounded-md hover:bg-white/10 transition"
       >
         {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
       </button>
@@ -72,8 +71,8 @@ const ModelViewer3D: React.FC<ModelViewer3DProps> = ({ src, alt, hotspots = [] }
         ar-modes="webxr scene-viewer quick-look"
         style={{
           width: "100%",
-          height: isFullscreen ? "100vh" : "360px",
-          background: "#020617",
+          height: "100%",
+          background: "transparent",
           touchAction: "none",
         }}
         shadow-intensity="1"

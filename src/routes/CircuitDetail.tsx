@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { circuits, type QuizQuestion } from "../data/circuits";
 import ModelViewer3D from "../components/ModelViewer3D";
+import CinematicNavbar from "../components/CinematicNavbar";
+import FadingVideo from "../components/FadingVideo";
+import { motion, type Variants } from "framer-motion";
+import BlurText from "../components/BlurText";
 
 const HOTSPOTS_MAP: Record<string, any[]> = {
   "voltage-divider": [
@@ -57,8 +61,17 @@ const HOTSPOTS_MAP: Record<string, any[]> = {
 
 export default function CircuitDetail() {
   const { slug } = useParams<{ slug: string }>();
-
   const circuit = circuits.find((c) => c.slug === slug);
+
+  const itemVariant: Variants = {
+    hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
+    visible: (customDelay: number) => ({
+      filter: "blur(0px)",
+      opacity: 1,
+      y: 0,
+      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" as const },
+    }),
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -66,187 +79,237 @@ export default function CircuitDetail() {
 
   if (!circuit) {
     return (
-      <section className="text-white pt-28 pb-16">
-        <div className="max-w-3xl mx-auto px-6">
-          <h1 className="text-3xl font-bold mb-4">Circuit not found</h1>
-          <p className="text-slate-400 mb-6">
-            The QR code may be incorrect, or this circuit has not been added
-            yet.
+      <div className="w-full bg-black min-h-screen font-body text-white selection:bg-white/20">
+        <CinematicNavbar />
+        <section className="relative z-10 pt-32 pb-16 px-6 max-w-3xl mx-auto flex flex-col items-center text-center">
+          <h1 className="text-4xl font-heading italic text-white mb-4">Circuit not found</h1>
+          <p className="text-white/70 mb-8 font-light">
+            The QR code may be incorrect, or this circuit has not been added yet.
           </p>
           <Link
-            to="/"
-            className="text-blue-400 hover:text-blue-300 underline"
+            to="/experiments"
+            className="liquid-glass rounded-full px-6 py-3 text-sm font-medium text-white hover:bg-white/10 transition-colors"
           >
-            Go back to all circuits
+            Go back to experiments
           </Link>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 
   return (
-    <section className="text-white pt-28 pb-12 animate-fadeIn">
-      <div className="max-w-5xl mx-auto px-6 space-y-10">
-        {/* Header */}
-        <header className="space-y-4 pb-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-blue-400">
-            {circuit.category}
-          </p>
-
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            {circuit.name.split(" ").slice(0, -1).join(" ")}{" "}
-            <span className="text-brand-gradient">
-              {circuit.name.split(" ").slice(-1)}
-            </span>
-          </h1>
-
-          <p className="text-slate-400 max-w-3xl leading-relaxed">
-            {circuit.description}
-          </p>
-        </header>
-
-        {/* 3D Viewer */}
-        {circuit.model3D && (
-          <section className="relative space-y-4">
-            <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">
-              Virtual <span className="text-brand-gradient">Circuit</span> View
-            </h2>
-              <span className="text-xs uppercase tracking-widest text-slate-400">
-                Interactive 3D
-              </span>
-            </div>
-
-            <div
-              className="relative isolate rounded-xl overflow-hidden
-                         border border-slate-700/60
-                         shadow-lg shadow-black/40"
-              style={{ perspective: "1200px" }}
-            >
-              <div
-                className="
-                  relative z-10
-                  transition-transform duration-300 ease-out
-                  hover:scale-[1.02]
-                "
-              >
-                <ModelViewer3D
-                  src={circuit.model3D}
-                  alt={circuit.name}
-                  hotspots={HOTSPOTS_MAP[circuit.slug]}
-                />
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-400">
-              Tip: Rotate and zoom to inspect the circuit. On supported phones,
-              tap the AR button to view it in your environment.
-            </p>
-          </section>
-        )}
-
-        {/* Components Used — Full Width */}
-        <section
-          className="
-            space-y-4
-           bg-slate-950/40
-            border border-slate-800/40
-            rounded-xl
-            p-6
-          "
-        >
-          <h2 className="text-xl font-semibold">Components Used</h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {circuit.components.map((comp, idx) => (
-              <div
-                key={idx}
-                className="
-                  relative overflow-hidden
-                  rounded-xl
-                  px-4 py-3
-                  border border-slate-700/60
-                  bg-gradient-to-br from-blue-500/10 via-slate-800/60 to-purple-500/10
-                  backdrop-blur-md
-                  transition-all duration-300
-                  hover:border-blue-400/70
-                  hover:shadow-lg hover:shadow-blue-500/10
-                  hover:-translate-y-[2px]
-                "
-              >
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400/5 to-purple-400/5 opacity-0 hover:opacity-100 transition" />
-                <p className="font-medium relative z-10">{comp.name}</p>
-                <p className="text-xs text-slate-400 mt-1 relative z-10">
-                  Type: {comp.type} • Quantity: {comp.quantity}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Wiring Steps — Below Components */}
-        <section
-          className="
-            space-y-3
-           bg-slate-950/40
-            border border-slate-800/40
-            rounded-xl
-            p-6
-          "
-        >
-          <h2 className="text-lg font-semibold tracking-tight text-slate-100">Wiring Steps</h2>
-
-          <ol className="list-decimal list-inside space-y-2 text-slate-300 max-w-3xl">
-            {circuit.wiringSteps.map((step, idx) => (
-              <li key={idx}>{step}</li>
-            ))}
-          </ol>
-
-          <p className="text-xs text-slate-400 mt-3">
-            This virtual representation mirrors the physical breadboard layout used in the lab.
-          </p>
-        </section>
-
-        {/* Code Snippet */}
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold">
-            {circuit.category === "Embedded Systems" ? "Microcontroller Code" : "Code Snippet"}
-          </h2>
-          <pre className="bg-slate-900/60 border border-slate-700/60 rounded-lg p-4 overflow-x-auto text-sm">
-            <code>{circuit.codeSnippet}</code>
-          </pre>
-        </section>
-
-        {/* Safety Notes */}
-        {circuit.safetyNotes && (
-          <section
-            className="
-              space-y-3
-             bg-slate-950/40
-              border border-slate-800/40
-              rounded-xl
-              p-6
-            "
-          >
-            <h2 className="text-xl font-semibold">Safety Notes</h2>
-            <ul className="list-disc list-inside text-slate-400 space-y-1">
-              {circuit.safetyNotes.map((note, idx) => (
-                <li key={idx}>{note}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {circuit.quiz && circuit.quiz.length > 0 && (
-          <QuizSection quiz={circuit.quiz} />
-        )}
-
+    <div className="relative w-full bg-black min-h-screen font-body text-white selection:bg-white/20 overflow-hidden">
+      
+      {/* Background Video */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <FadingVideo
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260319_055001_8e16d972-3b2b-441c-86ad-2901a54682f9.mp4"
+          poster="/images/circuits/circuit_detail.png"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Very light overlay just for contrast, no haze */}
+        <div className="absolute inset-0 bg-black/10"></div>
       </div>
-    </section>
+
+      <CinematicNavbar />
+
+      {/* Main Content */}
+      <section className="relative z-10 pt-32 pb-24">
+        <div className="max-w-5xl mx-auto px-6 space-y-12">
+          
+          {/* Header */}
+          <motion.header 
+            custom={0.2}
+            initial="hidden"
+            animate="visible"
+            variants={itemVariant}
+            className="space-y-6 pb-4"
+          >
+            <div className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium text-white/90 inline-block uppercase tracking-wider">
+              {circuit.category}
+            </div>
+
+            <BlurText 
+              text={circuit.name}
+              className="text-5xl md:text-6xl lg:text-[5rem] font-heading italic text-white leading-[0.9] tracking-[-2px]"
+            />
+
+            <p className="text-white/80 max-w-3xl text-lg font-light leading-relaxed">
+              {circuit.description}
+            </p>
+          </motion.header>
+
+          {/* 3D Viewer */}
+          {circuit.model3D && (
+            <motion.section 
+              custom={0.5}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariant}
+              className="relative space-y-4"
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-heading italic tracking-[-1px]">
+                  Virtual Circuit View
+                </h2>
+                <span className="liquid-glass rounded-full px-3 py-1 text-[11px] uppercase tracking-widest text-white/80">
+                  Interactive 3D
+                </span>
+              </div>
+
+              <div
+                className="relative isolate rounded-2xl overflow-hidden liquid-glass h-[500px]"
+                style={{ perspective: "1200px" }}
+              >
+                <div
+                  className="
+                    relative z-10 h-full w-full
+                    transition-transform duration-300 ease-out
+                    hover:scale-[1.01]
+                  "
+                >
+                  <ModelViewer3D
+                    src={circuit.model3D}
+                    alt={circuit.name}
+                    hotspots={HOTSPOTS_MAP[circuit.slug]}
+                  />
+                </div>
+              </div>
+
+              <p className="text-xs text-white/60 font-light flex items-center gap-2">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4"/>
+                  <path d="M12 8h.01"/>
+                </svg>
+                Tip: Rotate and zoom to inspect the circuit. On supported phones, tap the AR button to view it in your environment.
+              </p>
+            </motion.section>
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Components Used */}
+            <motion.section
+              custom={0.7}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariant}
+              className="liquid-glass rounded-2xl p-8 space-y-6"
+            >
+              <h2 className="text-2xl font-heading italic tracking-[-1px]">Components Used</h2>
+
+              <div className="flex flex-col gap-4">
+                {circuit.components.map((comp, idx) => (
+                  <div
+                    key={idx}
+                    className="
+                      relative overflow-hidden
+                      rounded-xl px-5 py-4
+                      liquid-glass
+                      transition-all duration-300
+                      hover:bg-white/[0.08]
+                      hover:-translate-y-[2px]
+                      flex justify-between items-center
+                    "
+                  >
+                    <div>
+                      <p className="font-medium text-white/90 text-lg">{comp.name}</p>
+                      <p className="text-sm text-white/60 mt-1 font-light">
+                        Type: {comp.type}
+                      </p>
+                    </div>
+                    <div className="bg-white/10 rounded-full w-8 h-8 flex items-center justify-center font-medium text-sm">
+                      {comp.quantity}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+
+            <div className="space-y-8 flex flex-col">
+              {/* Wiring Steps */}
+              <motion.section
+                custom={0.9}
+                initial="hidden"
+                animate="visible"
+                variants={itemVariant}
+                className="liquid-glass rounded-2xl p-8 flex-1 flex flex-col"
+              >
+                <h2 className="text-2xl font-heading italic tracking-[-1px] mb-6">Wiring Steps</h2>
+
+                <ol className="list-decimal list-inside space-y-3 text-white/80 font-light flex-1">
+                  {circuit.wiringSteps.map((step, idx) => (
+                    <li key={idx} className="leading-relaxed">{step}</li>
+                  ))}
+                </ol>
+
+                <p className="text-xs text-white/50 mt-6 border-t border-white/10 pt-4">
+                  This virtual representation mirrors the physical breadboard layout used in the lab.
+                </p>
+              </motion.section>
+            </div>
+          </div>
+
+          {/* Code Snippet */}
+          <motion.section 
+            custom={1.1}
+            initial="hidden"
+            animate="visible"
+            variants={itemVariant}
+            className="space-y-4"
+          >
+            <h2 className="text-2xl font-heading italic tracking-[-1px]">
+              {circuit.category === "Embedded Systems" ? "Microcontroller Code" : "Code Snippet"}
+            </h2>
+            <div className="liquid-glass rounded-2xl p-6 overflow-hidden">
+              <pre className="overflow-x-auto text-sm font-mono text-white/80 leading-relaxed">
+                <code>{circuit.codeSnippet}</code>
+              </pre>
+            </div>
+          </motion.section>
+
+          {/* Safety Notes */}
+          {circuit.safetyNotes && (
+            <motion.section
+              custom={1.2}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariant}
+              className="liquid-glass rounded-2xl p-8 border border-red-500/20"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <svg className="w-6 h-6 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                  <path d="M12 9v4"/>
+                  <path d="M12 17h.01"/>
+                </svg>
+                <h2 className="text-2xl font-heading italic tracking-[-1px] text-red-400">Safety Notes</h2>
+              </div>
+              <ul className="list-disc list-inside text-white/80 space-y-2 font-light">
+                {circuit.safetyNotes.map((note, idx) => (
+                  <li key={idx}>{note}</li>
+                ))}
+              </ul>
+            </motion.section>
+          )}
+
+          {/* Quiz Section */}
+          {circuit.quiz && circuit.quiz.length > 0 && (
+            <motion.div
+              custom={1.3}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariant}
+            >
+              <QuizSection quiz={circuit.quiz} />
+            </motion.div>
+          )}
+
+        </div>
+      </section>
+    </div>
   );
 }
-
-
 
 function QuizSection({ quiz }: { quiz: QuizQuestion[] }) {
   const [visibleAnswers, setVisibleAnswers] = React.useState<Record<number, boolean>>({});
@@ -259,34 +322,42 @@ function QuizSection({ quiz }: { quiz: QuizQuestion[] }) {
   };
 
   return (
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Quick Check</h2>
+    <section className="liquid-glass rounded-2xl p-8 space-y-6 mt-8">
+      <h2 className="text-2xl font-heading italic tracking-[-1px]">Knowledge Check</h2>
 
-      <div className="space-y-4">
+      <div className="space-y-8">
         {quiz.map((q, idx) => (
-          <div key={idx} className="space-y-2">
-            <p className="font-medium mb-3">
-              Q{idx + 1}. {q.question}
+          <div key={idx} className="space-y-3">
+            <p className="font-medium text-white/90 text-lg">
+              {idx + 1}. {q.question}
             </p>
 
-            <ul className="list-disc list-inside text-slate-400 text-sm space-y-1 mb-3">
+            <ul className="space-y-2 text-white/70 font-light pl-6">
               {q.options.map((opt, i) => (
-                <li key={i}>{opt}</li>
+                <li key={i} className="list-disc">{opt}</li>
               ))}
             </ul>
 
-            {!visibleAnswers[idx] ? (
-              <button
-                onClick={() => toggleAnswer(idx)}
-                className="text-sm text-blue-400 hover:text-blue-300 underline"
-              >
-                Show Answer
-              </button>
-            ) : (
-              <p className="text-sm text-emerald-400">
-                Answer: {q.answer}
-              </p>
-            )}
+            <div className="pt-2">
+              {!visibleAnswers[idx] ? (
+                <button
+                  onClick={() => toggleAnswer(idx)}
+                  className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium hover:bg-white/10 transition-colors"
+                >
+                  Reveal Answer
+                </button>
+              ) : (
+                <div className="liquid-glass rounded-lg p-3 px-4 border border-emerald-500/30">
+                  <p className="text-sm text-emerald-400 font-medium flex items-center gap-2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                      <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    Answer: {q.answer}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
