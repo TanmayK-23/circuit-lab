@@ -90,4 +90,3 @@ To add a new experiment to the lab platform:
 This project was developed to enhance the learning experience in the Spatial Computing Lab. 
 
 - **Tanmay Kumar** - Lead Engineer & Designer
-  - *Solely designed and engineered the entire platform.*
