@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Hls from "hls.js";
 
 interface FadingVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string;
@@ -8,6 +9,7 @@ export default function FadingVideo({ src, className, style, ...props }: FadingV
   const videoRef = useRef<HTMLVideoElement>(null);
   const rAFRef = useRef<number | null>(null);
   const fadingOutRef = useRef(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const FADE_MS = 500;
   const FADE_OUT_LEAD = 0.55; // seconds
@@ -44,14 +46,35 @@ export default function FadingVideo({ src, className, style, ...props }: FadingV
     const video = videoRef.current;
     if (!video) return;
 
+    // Reset loaded state when src changes
+    setIsLoaded(false);
+    video.style.opacity = "0";
+
+    let hls: Hls | null = null;
+
+    const initHls = () => {
+      if (src.includes(".m3u8") && Hls.isSupported()) {
+        hls = new Hls({
+          autoStartLoad: true,
+          capLevelToPlayerSize: true,
+        });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+      } else {
+        video.src = src;
+      }
+    };
+
+    initHls();
+
     const handleLoadedData = () => {
-      video.style.opacity = "0";
+      setIsLoaded(true);
       video.play().catch(() => {});
       fadeTo(1);
     };
 
     const handleTimeUpdate = () => {
-      if (!video.duration) return;
+      if (!video.duration || !isFinite(video.duration)) return;
       const remaining = video.duration - video.currentTime;
       if (!fadingOutRef.current && remaining <= FADE_OUT_LEAD && remaining > 0) {
         fadingOutRef.current = true;
@@ -78,20 +101,32 @@ export default function FadingVideo({ src, className, style, ...props }: FadingV
       video.removeEventListener("loadeddata", handleLoadedData);
       video.removeEventListener("timeupdate", handleTimeUpdate);
       video.removeEventListener("ended", handleEnded);
+      
+      if (hls) {
+        hls.destroy();
+      }
     };
-  }, []);
+  }, [src]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      className={className}
-      style={{ ...style, opacity: 0 }}
-      autoPlay
-      muted
-      playsInline
-      preload="auto"
-      {...props}
-    />
+    <div className={`relative overflow-hidden bg-black ${className || ""}`} style={style}>
+      {/* Poster Fallback without spinner */}
+      {!isLoaded && props.poster && (
+        <div className="absolute inset-0 z-0">
+          <img src={props.poster} alt="" className="w-full h-full object-cover" />
+        </div>
+      )}
+
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover z-10"
+        style={{ opacity: 0 }}
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        {...props}
+      />
+    </div>
   );
 }
