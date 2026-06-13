@@ -141,11 +141,7 @@ export default function CircuitDetail() {
 
           {/* 3D Viewer */}
           {circuit.model3D && (
-            <motion.section 
-              custom={0.5}
-              initial="hidden"
-              animate="visible"
-              variants={itemVariant}
+            <section 
               className="relative space-y-4"
             >
               <div className="flex items-center justify-between">
@@ -184,16 +180,12 @@ export default function CircuitDetail() {
                 </svg>
                 Tip: Rotate and zoom to inspect the circuit. On supported phones, tap the AR button to view it in your environment.
               </p>
-            </motion.section>
+            </section>
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Components Used */}
-            <motion.section
-              custom={0.7}
-              initial="hidden"
-              animate="visible"
-              variants={itemVariant}
+            <section
               className="liquid-glass rounded-2xl p-8 space-y-6"
             >
               <h2 className="text-2xl font-heading italic tracking-[-1px]">Components Used</h2>
@@ -224,15 +216,11 @@ export default function CircuitDetail() {
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
 
             <div className="space-y-8 flex flex-col">
               {/* Wiring Steps */}
-              <motion.section
-                custom={0.9}
-                initial="hidden"
-                animate="visible"
-                variants={itemVariant}
+              <section
                 className="liquid-glass rounded-2xl p-8 flex-1 flex flex-col"
               >
                 <h2 className="text-2xl font-heading italic tracking-[-1px] mb-6">Wiring Steps</h2>
@@ -246,16 +234,12 @@ export default function CircuitDetail() {
                 <p className="text-xs text-white/50 mt-6 border-t border-white/10 pt-4">
                   This virtual representation mirrors the physical breadboard layout used in the lab.
                 </p>
-              </motion.section>
+              </section>
             </div>
           </div>
 
           {/* Code Snippet */}
-          <motion.section 
-            custom={1.1}
-            initial="hidden"
-            animate="visible"
-            variants={itemVariant}
+          <section 
             className="space-y-4"
           >
             <h2 className="text-2xl font-heading italic tracking-[-1px]">
@@ -266,15 +250,11 @@ export default function CircuitDetail() {
                 <code>{circuit.codeSnippet}</code>
               </pre>
             </div>
-          </motion.section>
+          </section>
 
           {/* Safety Notes */}
           {circuit.safetyNotes && (
-            <motion.section
-              custom={1.2}
-              initial="hidden"
-              animate="visible"
-              variants={itemVariant}
+            <section
               className="liquid-glass rounded-2xl p-8 border border-red-500/20"
             >
               <div className="flex items-center gap-3 mb-4">
@@ -290,19 +270,14 @@ export default function CircuitDetail() {
                   <li key={idx}>{note}</li>
                 ))}
               </ul>
-            </motion.section>
+            </section>
           )}
 
           {/* Quiz Section */}
           {circuit.quiz && circuit.quiz.length > 0 && (
-            <motion.div
-              custom={1.3}
-              initial="hidden"
-              animate="visible"
-              variants={itemVariant}
-            >
+            <div>
               <QuizSection quiz={circuit.quiz} />
-            </motion.div>
+            </div>
           )}
 
         </div>
