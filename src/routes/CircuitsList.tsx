@@ -17,22 +17,24 @@ export default function CircuitsList() {
   };
 
   return (
-    <div className="w-full bg-black min-h-screen font-body text-white selection:bg-white/20">
-      <CinematicNavbar />
+    <div className="relative w-full bg-black min-h-screen font-body text-white selection:bg-white/20">
+      {/* GLOBAL BACKGROUND VIDEO */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <FadingVideo
+          src="/videos/home2.mp4"
+          poster="/images/circuits/experiments.png"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20"></div>
+      </div>
+
+      <div className="relative z-10">
+        <CinematicNavbar />
 
       {/* =========================================
           SECTION 1: HERO
           ========================================= */}
-      <section className="relative w-full h-screen flex flex-col overflow-hidden bg-black">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <FadingVideo
-            src="/videos/home2.mp4"
-            poster="/images/circuits/experiments.png"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-
+      <section className="relative w-full h-screen flex flex-col justify-center">
         {/* Content */}
         <div className="relative z-10 px-6 md:px-16 lg:px-20 flex flex-col items-center justify-center h-full">
           <div className="flex flex-col items-center text-center">
@@ -72,35 +74,17 @@ export default function CircuitsList() {
       {/* =========================================
           SECTION 2: GRID
           ========================================= */}
-      <section className="relative w-full min-h-screen bg-black">
-        {/* Background Video for Grid - Sticky to maintain aspect ratio during scroll */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="sticky top-0 w-full h-screen">
-            <FadingVideo
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260411_104032_69319010-2458-492b-b04d-b40a5dfa4482.mp4"
-              poster="/images/circuits/circuit_list.png"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Very light overlay just for contrast, no haze */}
-            <div className="absolute inset-0 bg-black/10"></div>
-          </div>
-        </div>
-
+      <section className="relative w-full min-h-screen">
         {/* Content */}
-        <div className="relative z-10 px-6 md:px-16 lg:px-20 pt-24 pb-24 flex flex-col min-h-screen">
-          <motion.div 
-            custom={0.2}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={itemVariant}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto"
+        <div className="relative z-10 px-6 md:px-16 lg:px-20 pt-24 pb-24 flex flex-col min-h-screen pointer-events-none">
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto pointer-events-auto"
           >
             {circuits.map((circuit) => (
               <Link
                 key={circuit.slug}
                 to={`/circuit/${circuit.slug}`}
-                className="liquid-glass-dark rounded-2xl p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1"
+                className="liquid-glass rounded-2xl p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1"
               >
                 <div className="h-48 w-full rounded-xl overflow-hidden mb-6 relative">
                   <img
@@ -134,9 +118,10 @@ export default function CircuitsList() {
                 </div>
               </Link>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
