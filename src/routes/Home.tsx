@@ -29,17 +29,18 @@ export default function Home() {
             className="absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top"
             style={{ width: "120%", height: "120%" }}
           />
+          <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
         </div>
 
         <CinematicNavbar />
 
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center pt-24 px-4">
-          
 
 
-          <BlurText 
-            text="Explore Circuits Across the Digital Universe" 
+
+          <BlurText
+            text="Explore Circuits Across the Digital Universe"
             className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic text-white leading-[0.8] max-w-2xl text-center tracking-[-4px]"
           />
 
@@ -48,9 +49,9 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={itemVariant}
-            className="mt-4 text-sm md:text-base text-white/90 max-w-2xl text-center font-body font-light leading-tight"
+            className="mt-4 text-sm md:text-base text-white/90 max-w-2xl text-center font-body font-light leading-relaxed"
           >
-            Discover electronics in ways once unimaginable. Our interactive 3D models and Augmented Reality tools bring hardware exploration directly to your browser—seamless and immersive.
+            Master electronics with our interactive 3D models and Augmented Reality tools. Learn, visualize, and build hardware directly in your browser—no physical components required.
           </motion.p>
 
           <motion.div
@@ -60,16 +61,16 @@ export default function Home() {
             variants={itemVariant}
             className="flex items-center justify-center gap-6 mt-8 pointer-events-auto"
           >
-            <Link to="/experiments" className="liquid-glass-strong rounded-full px-6 py-3 text-sm font-medium text-white flex items-center gap-2 hover:bg-white/10 transition-colors">
+            <Link to="/experiments" className="bg-white text-black hover:bg-white/90 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none rounded-full px-8 py-3.5 text-sm font-semibold flex items-center gap-2 transition-colors">
               Explore Experiments
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 17L17 7" />
                 <path d="M7 7h10v10" />
               </svg>
             </Link>
-            <button 
+            <button
               onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-              className="text-sm font-medium text-white/90 hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
+              className="text-sm font-medium text-white/90 hover:text-white flex items-center gap-2 transition-colors cursor-pointer px-4 py-2 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Know More
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -88,24 +89,24 @@ export default function Home() {
           >
             <div className="liquid-glass rounded-[1.25rem] p-5 w-[220px] flex flex-col justify-between items-start">
               <svg className="w-7 h-7 text-white mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
               </svg>
               <div>
                 <div className="font-heading italic text-white text-4xl tracking-[-1px] leading-none">8+</div>
                 <div className="text-xs text-white/80 font-body font-light mt-2">Interactive 3D Circuits</div>
               </div>
             </div>
-            
+
             <div className="liquid-glass rounded-[1.25rem] p-5 w-[220px] flex flex-col justify-between items-start">
               <svg className="w-7 h-7 text-white mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                <circle cx="12" cy="13" r="3"/>
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                <circle cx="12" cy="13" r="3" />
               </svg>
               <div>
-                <div className="font-heading italic text-white text-3xl tracking-[-1px] leading-none mb-1 mt-1">ArUco</div>
-                <div className="text-xs text-white/80 font-body font-light mt-2">Marker-Based AR Tracking</div>
+                <div className="font-heading italic text-white text-3xl tracking-[-1px] leading-none mb-1 mt-1">WebXR</div>
+                <div className="text-xs text-white/80 font-body font-light mt-2">In Your Environment</div>
               </div>
             </div>
           </motion.div>
@@ -135,6 +136,7 @@ export default function Home() {
             poster="/images/circuits/home2.png"
             className="absolute inset-0 w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
         </div>
 
         {/* Content */}
@@ -142,12 +144,12 @@ export default function Home() {
           <div className="mb-auto">
             <div className="text-sm font-body text-white/80 mb-6 uppercase tracking-wider">// Features</div>
             <h2 className="font-heading italic text-white text-6xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]">
-              Learning<br/>evolved
+              Learning<br />evolved
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            
+
             {/* Card 1 */}
             <div className="liquid-glass rounded-[1.25rem] p-6 min-h-[360px] flex flex-col">
               <div className="flex items-start justify-between gap-4">
@@ -166,7 +168,7 @@ export default function Home() {
               <div className="flex-1"></div>
               <div className="mt-6">
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">Interactive 3D</h3>
-                <p className="mt-3 text-sm text-white/90 font-body font-light leading-snug max-w-[32ch]">
+                <p className="mt-3 text-sm text-white/90 font-body font-light leading-relaxed max-w-[32ch]">
                   View precise 3D recreations of breadboard layouts and hardware modules. Click on individual components to see their roles and technical details.
                 </p>
               </div>
@@ -181,8 +183,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="flex flex-wrap justify-end gap-1.5 max-w-[75%]">
-                  <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">WebXR</span>
-                  <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">ArUco Tracking</span>
+                  <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">AR & WebXR</span>
                   <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">Spatial Computing</span>
                   <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">Real-World</span>
                 </div>
@@ -190,8 +191,8 @@ export default function Home() {
               <div className="flex-1"></div>
               <div className="mt-6">
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">Augmented Reality</h3>
-                <p className="mt-3 text-sm text-white/90 font-body font-light leading-snug max-w-[32ch]">
-                  Seamlessly place circuits into the real-world environment using ArUco marker tracking and WebXR right from your mobile device.
+                <p className="mt-3 text-sm text-white/90 font-body font-light leading-relaxed max-w-[32ch]">
+                  Seamlessly place circuits into your real-world environment using AR and WebXR right from your mobile device.
                 </p>
               </div>
             </div>
@@ -214,7 +215,7 @@ export default function Home() {
               <div className="flex-1"></div>
               <div className="mt-6">
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">Complete Breakdowns</h3>
-                <p className="mt-3 text-sm text-white/90 font-body font-light leading-snug max-w-[32ch]">
+                <p className="mt-3 text-sm text-white/90 font-body font-light leading-relaxed max-w-[32ch]">
                   Access step-by-step wiring guides, microcontroller code snippets, component lists, and interactive quizzes for every single circuit.
                 </p>
               </div>
