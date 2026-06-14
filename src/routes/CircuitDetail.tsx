@@ -108,7 +108,7 @@ export default function CircuitDetail() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Very light overlay just for contrast, no haze */}
-        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
       </div>
 
       <CinematicNavbar />
@@ -125,14 +125,14 @@ export default function CircuitDetail() {
             variants={itemVariant}
             className="space-y-6 pb-4"
           >
-            <div className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium text-white/90 inline-block uppercase tracking-wider">
-              {circuit.category}
-            </div>
-
             <BlurText 
               text={circuit.name}
               className="text-5xl md:text-6xl lg:text-[5rem] font-heading italic text-white leading-[0.9] tracking-[-2px]"
             />
+
+            <div className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium text-white/90 inline-block uppercase tracking-wider">
+              {circuit.category}
+            </div>
 
             <p className="text-white/80 max-w-3xl text-lg font-light leading-relaxed">
               {circuit.description}
@@ -231,7 +231,7 @@ export default function CircuitDetail() {
                   ))}
                 </ol>
 
-                <p className="text-xs text-white/50 mt-6 border-t border-white/10 pt-4">
+                <p className="text-xs text-white/70 leading-relaxed mt-6 border-t border-white/10 pt-4">
                   This virtual representation mirrors the physical breadboard layout used in the lab.
                 </p>
               </section>
@@ -265,7 +265,7 @@ export default function CircuitDetail() {
                 </svg>
                 <h2 className="text-2xl font-heading italic tracking-[-1px] text-red-400">Safety Notes</h2>
               </div>
-              <ul className="list-disc list-inside text-white/80 space-y-2 font-light">
+              <ul className="list-disc list-inside text-white/90 space-y-2 font-light leading-relaxed">
                 {circuit.safetyNotes.map((note, idx) => (
                   <li key={idx}>{note}</li>
                 ))}
@@ -307,7 +307,7 @@ function QuizSection({ quiz }: { quiz: QuizQuestion[] }) {
               {idx + 1}. {q.question}
             </p>
 
-            <ul className="space-y-2 text-white/70 font-light pl-6">
+            <ul className="space-y-2 text-white/80 font-light leading-relaxed pl-6">
               {q.options.map((opt, i) => (
                 <li key={i} className="list-disc">{opt}</li>
               ))}
@@ -317,7 +317,7 @@ function QuizSection({ quiz }: { quiz: QuizQuestion[] }) {
               {!visibleAnswers[idx] ? (
                 <button
                   onClick={() => toggleAnswer(idx)}
-                  className="liquid-glass rounded-full px-4 py-1.5 text-xs font-medium hover:bg-white/10 transition-colors"
+                  className="liquid-glass rounded-full px-6 py-2.5 text-sm font-medium hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   Reveal Answer
                 </button>
