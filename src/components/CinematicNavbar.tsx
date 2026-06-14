@@ -15,10 +15,10 @@ export default function CinematicNavbar() {
 
         {/* Center: Desktop Nav Pill */}
         <div className="hidden md:flex liquid-glass rounded-full p-1.5 items-center gap-1.5 pointer-events-auto">
-          <Link to="/" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors">Home</Link>
-          <Link to="/experiments" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors">Experiments</Link>
-          <Link to="/about" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors">About Us</Link>
-          <Link to="/experiments" className="bg-white text-black px-4 py-2 rounded-full text-[15px] font-semibold flex items-center gap-1 whitespace-nowrap ml-1.5 hover:bg-white/90 transition-colors">
+          <Link to="/" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md">Home</Link>
+          <Link to="/experiments" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md">Experiments</Link>
+          <Link to="/about" className="px-3.5 py-2 text-[15px] font-medium text-white/90 font-body hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md">About Us</Link>
+          <Link to="/experiments" className="bg-white text-black px-4 py-2 rounded-full text-[15px] font-semibold flex items-center gap-1 whitespace-nowrap ml-1.5 hover:bg-white/90 transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black">
             Enter Lab
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 17L17 7" />
@@ -31,7 +31,7 @@ export default function CinematicNavbar() {
         <div className="w-[52px] h-[52px] shrink-0 md:hidden flex justify-end relative z-50">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-[52px] h-[52px] rounded-full liquid-glass flex items-center justify-center pointer-events-auto text-white"
+            className="w-[52px] h-[52px] rounded-full liquid-glass flex items-center justify-center pointer-events-auto text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 7h16M4 12h16m-7 5h7"} />
@@ -53,11 +53,11 @@ export default function CinematicNavbar() {
             className="fixed inset-0 z-40 bg-black/80 flex flex-col items-center justify-center"
           >
             <div className="flex flex-col items-center gap-8 pointer-events-auto text-center">
-              <Link onClick={() => setIsMobileMenuOpen(false)} to="/" className="text-3xl font-heading italic text-white/90 hover:text-white">Home</Link>
-              <Link onClick={() => setIsMobileMenuOpen(false)} to="/experiments" className="text-3xl font-heading italic text-white/90 hover:text-white">Experiments</Link>
-              <Link onClick={() => setIsMobileMenuOpen(false)} to="/about" className="text-3xl font-heading italic text-white/90 hover:text-white">About Us</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} to="/" className="text-3xl font-heading italic text-white/90 hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md px-4 py-2">Home</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} to="/experiments" className="text-3xl font-heading italic text-white/90 hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md px-4 py-2">Experiments</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} to="/about" className="text-3xl font-heading italic text-white/90 hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded-md px-4 py-2">About Us</Link>
               
-              <Link onClick={() => setIsMobileMenuOpen(false)} to="/experiments" className="mt-8 bg-white text-black px-8 py-3 rounded-full text-lg font-semibold flex items-center gap-2">
+              <Link onClick={() => setIsMobileMenuOpen(false)} to="/experiments" className="mt-8 bg-white text-black px-8 py-3 rounded-full text-lg font-semibold flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black">
                 Enter Lab
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7" />
