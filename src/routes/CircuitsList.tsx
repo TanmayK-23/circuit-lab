@@ -25,7 +25,7 @@ export default function CircuitsList() {
           poster="/images/circuits/experiments.png"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black/0"></div>
       </div>
 
       <div className="relative z-10">
@@ -84,7 +84,7 @@ export default function CircuitsList() {
               <Link
                 key={circuit.slug}
                 to={`/circuit/${circuit.slug}`}
-                className="liquid-glass rounded-2xl p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1"
+                className="liquid-glass-strong rounded-2xl p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 <div className="h-48 w-full rounded-xl overflow-hidden mb-6 relative">
                   <img
@@ -103,7 +103,7 @@ export default function CircuitsList() {
                     <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap inline-block mb-4">
                       {circuit.category}
                     </span>
-                    <p className="text-sm text-white/80 font-body font-light leading-snug line-clamp-2">
+                    <p className="text-sm text-white/90 font-body font-light leading-relaxed line-clamp-2">
                       {circuit.description}
                     </p>
                   </div>
