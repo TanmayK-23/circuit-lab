@@ -103,7 +103,7 @@ export default function CircuitDetail() {
       {/* Background Video */}
       <div className="fixed inset-0 z-0 pointer-events-none">
 
-        <img src="/images/circuits/Lithos.png" alt="Lithos Background" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/images/circuits/Lithos.jpg" alt="Lithos Background" className="absolute inset-0 w-full h-full object-cover" />
         {/* Very light overlay just for contrast, no haze */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>

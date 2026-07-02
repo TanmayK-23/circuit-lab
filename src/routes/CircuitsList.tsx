@@ -22,7 +22,7 @@ export default function CircuitsList() {
       <div className="fixed inset-0 z-0 pointer-events-none">
         <FadingVideo
           src="/videos/home2.mp4"
-          poster="/images/circuits/experiments.png"
+          poster="/images/circuits/experiments.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/0"></div>
