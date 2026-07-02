@@ -99,16 +99,13 @@ export default function CircuitDetail() {
 
   return (
     <div className="relative w-full bg-black min-h-screen font-body text-white selection:bg-white/20 overflow-hidden">
-      
+
       {/* Background Video */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <FadingVideo
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260319_055001_8e16d972-3b2b-441c-86ad-2901a54682f9.mp4"
-          poster="/images/circuits/circuit_detail.png"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+
+        <img src="/images/circuits/Lithos.png" alt="Lithos Background" className="absolute inset-0 w-full h-full object-cover" />
         {/* Very light overlay just for contrast, no haze */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       <CinematicNavbar />
@@ -116,16 +113,16 @@ export default function CircuitDetail() {
       {/* Main Content */}
       <section className="relative z-10 pt-32 pb-24">
         <div className="max-w-5xl mx-auto px-6 space-y-12">
-          
+
           {/* Header */}
-          <motion.header 
+          <motion.header
             custom={0.2}
             initial="hidden"
             animate="visible"
             variants={itemVariant}
             className="space-y-6 pb-4"
           >
-            <BlurText 
+            <BlurText
               text={circuit.name}
               className="text-5xl md:text-6xl lg:text-[5rem] font-heading italic text-white leading-[0.9] tracking-[-2px]"
             />
@@ -141,7 +138,7 @@ export default function CircuitDetail() {
 
           {/* 3D Viewer */}
           {circuit.model3D && (
-            <section 
+            <section
               className="relative space-y-4"
             >
               <div className="flex items-center justify-between">
@@ -174,9 +171,9 @@ export default function CircuitDetail() {
 
               <p className="text-xs text-white/60 font-light flex items-center gap-2">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 16v-4"/>
-                  <path d="M12 8h.01"/>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <path d="M12 8h.01" />
                 </svg>
                 Tip: Rotate and zoom to inspect the circuit. On supported phones, tap the AR button to view it in your environment.
               </p>
@@ -239,7 +236,7 @@ export default function CircuitDetail() {
           </div>
 
           {/* Code Snippet */}
-          <section 
+          <section
             className="space-y-4"
           >
             <h2 className="text-2xl font-heading italic tracking-[-1px]">
@@ -259,9 +256,9 @@ export default function CircuitDetail() {
             >
               <div className="flex items-center gap-3 mb-4">
                 <svg className="w-6 h-6 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-                  <path d="M12 9v4"/>
-                  <path d="M12 17h.01"/>
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                  <path d="M12 9v4" />
+                  <path d="M12 17h.01" />
                 </svg>
                 <h2 className="text-2xl font-heading italic tracking-[-1px] text-red-400">Safety Notes</h2>
               </div>
@@ -325,8 +322,8 @@ function QuizSection({ quiz }: { quiz: QuizQuestion[] }) {
                 <div className="liquid-glass rounded-lg p-3 px-4 border border-emerald-500/30">
                   <p className="text-sm text-emerald-400 font-medium flex items-center gap-2">
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                      <polyline points="22 4 12 14.01 9 11.01"/>
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                     Answer: {q.answer}
                   </p>
