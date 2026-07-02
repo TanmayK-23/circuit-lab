@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { circuits, type QuizQuestion } from "../data/circuits";
 import ModelViewer3D from "../components/ModelViewer3D";
 import CinematicNavbar from "../components/CinematicNavbar";
-import FadingVideo from "../components/FadingVideo";
+
 import { motion, type Variants } from "framer-motion";
 import BlurText from "../components/BlurText";
 
