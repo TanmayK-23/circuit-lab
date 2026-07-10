@@ -7,9 +7,9 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const location = useLocation();
-  const isCinematic = 
-    location.pathname === "/" || 
-    location.pathname === "/about" || 
+  const isCinematic =
+    location.pathname === "/" ||
+    location.pathname === "/about" ||
     location.pathname === "/experiments" ||
     location.pathname.startsWith("/circuit/");
 
